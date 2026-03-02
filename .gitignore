@@ -1,0 +1,18 @@
+.azure
+
+# Environment files (contains sensitive data intended for local testing only)
+.env
+.env.*
+!.env.example
+
+# VS Code workspace settings (contains sensitive data intended for local testing only)
+.vscode/settings.json
+
+# Terraform files
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+*.tfplan
+.terraform.tfvars
+terraform.tfvars
