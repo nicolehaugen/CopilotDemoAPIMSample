@@ -610,7 +610,7 @@ resource "azurerm_api_management_policy_fragment" "backend_selector" {
   value             = file("${path.module}/../../../Resources/Fragments/backend-selector.xml")
 
   depends_on = [
-    data.azurerm_api_management.apim_readiness_check,
+    time_sleep.apim_management_api_delay,
     azurerm_api_management_named_value.gemini_api_key
   ]
 }
@@ -621,7 +621,7 @@ resource "azurerm_api_management_policy_fragment" "config_cache" {
   format            = "rawxml"
   value             = file("${path.module}/../../../Resources/Fragments/central-cache-manager.xml")
 
-  depends_on = [data.azurerm_api_management.apim_readiness_check]
+  depends_on = [time_sleep.apim_management_api_delay]
 }
 
 resource "azurerm_api_management_policy_fragment" "debug_headers" {
@@ -630,7 +630,7 @@ resource "azurerm_api_management_policy_fragment" "debug_headers" {
   format            = "rawxml"
   value             = file("${path.module}/../../../Resources/Fragments/diagnostic-headers.xml")
 
-  depends_on = [data.azurerm_api_management.apim_readiness_check]
+  depends_on = [time_sleep.apim_management_api_delay]
 }
 
 resource "azurerm_api_management_policy_fragment" "metadata_config" {
@@ -639,7 +639,7 @@ resource "azurerm_api_management_policy_fragment" "metadata_config" {
   format            = "rawxml"
   value             = file("${path.module}/../../../Resources/Fragments/metadata-config.xml")
 
-  depends_on = [data.azurerm_api_management.apim_readiness_check]
+  depends_on = [time_sleep.apim_management_api_delay]
 }
 
 resource "azurerm_api_management_policy_fragment" "path_builder" {
@@ -649,7 +649,7 @@ resource "azurerm_api_management_policy_fragment" "path_builder" {
   value             = file("${path.module}/../../../Resources/Fragments/path-builder.xml")
 
   depends_on = [
-    data.azurerm_api_management.apim_readiness_check,
+    time_sleep.apim_management_api_delay,
     azurerm_api_management_named_value.gemini_api_key
   ]
 }
@@ -660,7 +660,7 @@ resource "azurerm_api_management_policy_fragment" "token_limiter" {
   format            = "rawxml"
   value             = file("${path.module}/../../../Resources/Fragments/token-limiter.xml")
 
-  depends_on = [data.azurerm_api_management.apim_readiness_check]
+  depends_on = [time_sleep.apim_management_api_delay]
 }
 
 resource "azurerm_api_management_policy_fragment" "request_processor" {
@@ -669,7 +669,7 @@ resource "azurerm_api_management_policy_fragment" "request_processor" {
   format            = "rawxml"
   value             = file("${path.module}/../../../Resources/Fragments/request-processor.xml")
 
-  depends_on = [data.azurerm_api_management.apim_readiness_check]
+  depends_on = [time_sleep.apim_management_api_delay]
 }
 
 resource "azurerm_api_management_policy_fragment" "security_handler" {
@@ -679,7 +679,7 @@ resource "azurerm_api_management_policy_fragment" "security_handler" {
   value             = file("${path.module}/../../../Resources/Fragments/security-handler.xml")
 
   depends_on = [
-    data.azurerm_api_management.apim_readiness_check,
+    time_sleep.apim_management_api_delay,
     azurerm_api_management_named_value.jwt_app_registration_id,
     azurerm_api_management_named_value.jwt_issuer,
     azurerm_api_management_named_value.jwt_openid_config_url
@@ -692,7 +692,7 @@ resource "azurerm_api_management_policy_fragment" "token_logger" {
   format            = "rawxml"
   value             = file("${path.module}/../../../Resources/Fragments/token-logger.xml")
 
-  depends_on = [data.azurerm_api_management.apim_readiness_check]
+  depends_on = [time_sleep.apim_management_api_delay]
 }
 
 # ============================================================================

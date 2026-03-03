@@ -25,14 +25,12 @@ INPUT VARIABLES:
 	- jwt-openid-config: JWT OpenID configuration URL
 	- model-id: Extracted model identifier
 	- model-tier: Model tier (standard, premium)
-	- remaining-tokens: Remaining tokens in current minute window
-	- remaining-quota-tokens: Remaining tokens in quota period
+
 	- request-timeout: Calculated request timeout in seconds
 	- routing-processed-path: Path with product prefix removed
 	- selected-api-version: Selected API version for the request
 	- selected-backend: Selected backend pool name
 	- token-limit-key: Generated token limiting key
-	- tokens-consumed: Tokens consumed by current request
 	- user-id: User identifier from auth
 
 OUTPUT VARIABLES:
@@ -115,25 +113,5 @@ UPSTREAM DEPENDENCIES:
 	<set-header name="UAIG-Model-Tier" exists-action="override">
 		<value>@(context.Variables.GetValueOrDefault("model-tier", "not-set"))</value>
 	</set-header>
-	<set-header name="UAIG-Remaining-Tokens" exists-action="override">
-		<value>@{
-        if (!context.Variables.ContainsKey("remaining-tokens")) { return "not-set"; }
-        return Convert.ToString(context.Variables["remaining-tokens"]);
-    }</value>
-	</set-header>
-	<set-header name="UAIG-Remaining-Quota-Tokens" exists-action="override">
-		<value>@{
-        if (!context.Variables.ContainsKey("remaining-quota-tokens")) { return "not-set"; }
-        return Convert.ToString(context.Variables["remaining-quota-tokens"]);
-    }</value>
-	</set-header>
-	<set-header name="UAIG-Tokens-Consumed" exists-action="override">
-		<value>@{
-        var consumed = context.Variables.GetValueOrDefault<int?>("tokens-consumed");
-        return consumed?.ToString() ?? "not-set";
-    }</value>
-	</set-header>
-	<set-header name="UAIG-Model-Tier" exists-action="override">
-		<value>@(context.Variables.GetValueOrDefault("model-tier", "not-set"))</value>
-	</set-header>
+
 </fragment>
