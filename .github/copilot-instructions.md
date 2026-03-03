@@ -60,11 +60,6 @@ main.tfvars.json          variables.tf
 ```
 ├── .github/                      # GitHub configuration and automation
 │   ├── workflows/                # GitHub Actions CI/CD pipelines
-│   ├── skills/                   # Copilot agent skills
-│   │   ├── apim-debug-tracer/    # Traces APIM policy execution for debugging
-│   │   ├── apim-policy-syntax-checker/  # Validates APIM policy XML syntax
-│   │   ├── code-review-agent/    # Reviews code using GPT-5.2 Codex via APIM gateway
-│   │   └── http-test-executor/   # Executes .http REST Client test files
 │
 ├── Infra/                        # Terraform infrastructure as code
 │   ├── *.tf files                # Infrastructure definitions 

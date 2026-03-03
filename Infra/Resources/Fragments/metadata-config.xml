@@ -53,12 +53,6 @@ UPSTREAM DEPENDENCIES:
 				'tier': 'standard',
 				'api-version': 'v1beta',
 				'timeout': 120
-			},
-			'gpt-5.2-codex': {
-				'backend': 'premium-pool',
-				'tier': 'premium',
-				'api-version': '2024-02-15-preview',
-				'timeout': 180
 			}
 		},
 		'api-types': {
