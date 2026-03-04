@@ -24,7 +24,6 @@
 ### 
 ### 2. TEST STRATEGY:
 ###    - Send requests with large prompts to consume tokens faster
-###    - Monitor UAIG-Remaining-Tokens header to see token consumption
 ###    - When tokens are exhausted: 429 from APIM (rate limit) or 403 (quota exceeded)
 ### 
 ### Prerequisites:
@@ -34,17 +33,13 @@
 ### Expected Headers:
 ### - UAIG-Token-Limit-Key: Token limiting key (shows API Key vs JWT identity)
 ### - UAIG-Model-Tier: Model tier (standard or premium) - determines token limits
-### - UAIG-Remaining-Tokens: Remaining tokens in current minute window
-### - UAIG-Remaining-Quota-Tokens: Remaining tokens in daily quota
-### - UAIG-Tokens-Consumed: Tokens consumed by the request (set after response)
 ### - UAIG-Model-Tier: Model tier (standard or premium)
-### - UAIG-Retry-After: Retry delay when token rate limit hit (APIM 429)
+### - Retry-After: Retry delay when token rate limit hit (APIM 429)
 ###
 ### Usage:
 ### - Click "Send Request" above each request in VS Code with REST Client extension
 ### - For tests that require JWT bearer token authentication, run Authentication Setup to generate the JWT token first
 ### - JWT tokens expire; if you get 401 errors, re-run request to refresh the token 
-### - Monitor token consumption via UAIG-Tokens-Consumed header
 ### - Expected 429 responses when per-minute limit exceeded, 403 when daily quota exceeded
 
 ###
@@ -97,10 +92,7 @@ grant_type=client_credentials
 # UAIG-Forwarded-Path: /openai/responses
 # UAIG-Token-Limit-Key: uaig-sub-{subscription-id}-standard
 # UAIG-Model-Tier: standard (1000 TPM / 5000 hourly quota)
-# UAIG-Remaining-Tokens: {remaining} (per-minute limit, resets every minute)
-# UAIG-Remaining-Quota-Tokens: {remaining} (hourly quota, resets every hour)
-# UAIG-Tokens-Consumed: {consumed} (actual tokens used by this request)
-# UAIG-Retry-After: {seconds} (appears only on 429 responses when rate limit exceeded)
+# Retry-After: {seconds} (appears only on 429 responses when rate limit exceeded)
 ### NOTE: 
 ### Token-based limiting tracks actual consumption, not request counts
 ### After waiting the specified time in retry-after header, per-minute limit resets
@@ -132,10 +124,7 @@ Content-Type: application/json
 # UAIG-Forwarded-Path: /openai/responses
 # UAIG-Token-Limit-Key: uaig-jwt-{user-id}-standard
 # UAIG-Model-Tier: standard (1000 TPM / 5000 hourly quota)
-# UAIG-Remaining-Tokens: {remaining} (per-minute limit, resets every minute)
-# UAIG-Remaining-Quota-Tokens: {remaining} (hourly quota, resets every hour)
-# UAIG-Tokens-Consumed: {consumed} (actual tokens used by this request)
-# UAIG-Retry-After: {seconds} (appears only on 429 responses when rate limit exceeded)
+# Retry-After: {seconds} (appears only on 429 responses when rate limit exceeded)
 ### Note: 
 ### Token-based limiting tracks actual consumption, not request counts
 ### JWT token limiting uses user-based keys for per-user token allocation

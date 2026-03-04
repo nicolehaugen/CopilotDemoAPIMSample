@@ -262,7 +262,7 @@ The fragment creates unique token limiting keys based on authentication method:
 
 The token limiting uses the `tier` setting from `metadata-config` to assign each model to a tier. The actual token limit values (tokens-per-minute and token-quota) are hardcoded in the fragment because the `llm-token-limit` policy doesn't allow policy expressions for these attributes.
 
-The fragment applies token limits using APIM's built-in [llm-token-limit](https://learn.microsoft.com/azure/api-management/llm-token-limit-policy) policy, automatically returning 429 errors when per-minute limits are exceeded (with UAIG-Retry-After header) and 403 errors when hourly quotas are exhausted. Diagnostic headers provide visibility into remaining tokens and consumption.
+The fragment applies token limits using APIM's built-in [llm-token-limit](https://learn.microsoft.com/azure/api-management/llm-token-limit-policy) policy, automatically returning 429 errors when per-minute limits are exceeded (with Retry-After header) and 403 errors when hourly quotas are exhausted.
 
 ### Request timeout management
 
