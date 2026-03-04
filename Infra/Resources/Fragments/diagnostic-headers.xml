@@ -29,6 +29,7 @@ INPUT VARIABLES:
 	- request-timeout: Calculated request timeout in seconds
 	- routing-processed-path: Path with product prefix removed
 	- selected-api-version: Selected API version for the request
+	- context.Response.Headers["x-ms-region"]: Actual Azure region that served the AI request
 	- selected-backend: Selected backend pool name
 	- token-limit-key: Generated token limiting key
 	- user-id: User identifier from auth
@@ -97,6 +98,9 @@ UPSTREAM DEPENDENCIES:
 		<value>@(context.Variables.GetValueOrDefault("finalPath", "not-set"))</value>
 	</set-header>
 	<!-- Backend selection -->
+	<set-header name="UAIG-Region" exists-action="override">
+		<value>@(context.Response.Headers.GetValueOrDefault("x-ms-region", context.Deployment.Region))</value>
+	</set-header>
 	<set-header name="UAIG-Selected-Backend" exists-action="override">
 		<value>@(context.Variables.GetValueOrDefault("selected-backend", "not-set"))</value>
 	</set-header>
