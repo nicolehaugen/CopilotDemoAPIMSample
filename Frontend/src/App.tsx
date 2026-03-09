@@ -136,7 +136,7 @@ export default function App() {
   return (
     <div style={styles.container}>
       <header style={styles.header}>
-        <h1 style={styles.title}>🚀 AI Gateway Pipeline Explorer</h1>
+        <h1 style={styles.title}>🚀 Nicole's AI Gateway Pipeline Explorer</h1>
         <p style={styles.subtitle}>
           Watch your request travel through the AI gateway pipeline
         </p>
