@@ -133,6 +133,8 @@ export function RequestBar({ onSend, onRaceAll, isLoading }: RequestBarProps) {
           <button
             key={m.id}
             type="button"
+            aria-label={`Select ${m.name} model`}
+            aria-pressed={selectedModel === m.id}
             style={chipStyle(m, selectedModel === m.id)}
             onClick={() => setSelectedModel(m.id)}
           >
